@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>게시물 작성폼</title>
+</head>
+
+<style>
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+    .layout > form > div {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .layout > form > div > label {
+        width: 80px;
+        text-align: right;
+        margin-right: 10px;
+    }
+
+    .layout > form > div > input,
+    .layout > form > div > textarea {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .layout > form > div > textarea {
+        min-height: 300px;
+        resize: none;
+    }
+
+    .layout > form > div > button {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 14px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+<div class="layout">
+  <form th:action="@{/board/update/{id}(id = ${board.id})}" method="post">
+    <div>
+      <label for="title">제목</label>
+      <input id="title" name="title" type="text" th:value="${board.title}" placeholder="제목을 입력하세요.">
+    </div>
+    <div>
+      <label for="content">내용</label>
+      <textarea id="content" name="content" th:text="${board.content}" placeholder="내용을 입력하세요."></textarea>
+    </div>
+    <div>
+      <button type="submit">수정</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
