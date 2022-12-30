@@ -3,13 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>게시물 상세 페이지</title>
+    <style>
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        p {
+            font-size: 1.5em;
+            text-align: center;
+            margin: 20px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 0 10px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+
+        a:hover {
+            background-color: #444;
+        }
+    </style>
 </head>
 <body>
-
 <h1 th:text="${board.title}">제목입니다</h1>
 <p th:text="${board.content}">내용이 들어갈 부분입니다</p>
-<a th:href="@{${board.filepath}}">다운받기</a>
-<a th:href="@{/board/delete(id=${board.id})}">글삭제</a>
-<a th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
+<div style="text-align: center; margin-top: 20px;">
+    <a th:href="@{${board.filepath}}">다운받기</a>
+    <a th:href="@{/board/delete(id=${board.id})}">글삭제</a>
+    <a th:href="@{/board/modify/{id}(id = ${board.id})}">수정</a>
+</div>
 </body>
 </html>
