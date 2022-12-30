@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller // 골뱅이를 어노테이션이라고함 / 스프링이 재실행을 할때 여기가 컨트롤러라고 인식을함
 public class BoardController {
@@ -23,11 +24,15 @@ public class BoardController {
     }
 
     @PostMapping("/board/writepro")
-    public String boardWritePro(Board board) {
+    public String boardWritePro(Board board, Model model, MultipartFile file) throws Exception{
 
-        boardService.write(board);
+        boardService.write(board, file);
 
-       return "";
+        model.addAttribute("message", "글 작성이 완료되었습니다.");
+
+        model.addAttribute("searchUrl", "/board/list");
+
+       return "message";
     }
 
     @GetMapping("/board/list")
@@ -65,13 +70,13 @@ public class BoardController {
     }
 
     @PostMapping("/board/update/{id}")
-    public  String boadUpdate(@PathVariable("id") Integer id,Board board) {
+    public  String boadUpdate(@PathVariable("id") Integer id,Board board, MultipartFile file) throws  Exception{
 
        Board boardTemp = boardService.boardView(id);
        boardTemp.setTitle(board.getTitle());
        boardTemp.setContent(board.getContent());
 
-       boardService.write(boardTemp);
+       boardService.write(boardTemp, file);
 
        return "redirect:/board/list";
     }
